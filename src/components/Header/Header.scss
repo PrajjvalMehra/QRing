@@ -1,0 +1,17 @@
+@import '../../index.scss';
+
+.header {
+    background-color: var(--base-color);
+    z-index: 1;
+    text-align: left;
+    color: white;
+    align-items: center;
+    padding-left: 1em;
+    height: 60px;
+}
+
+@media screen and (min-width: 1080px) {
+    .formContainer{
+        max-width: 30%;
+    }
+}
