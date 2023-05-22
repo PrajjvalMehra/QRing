@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Row } from "antd";
 import Header from "../../components/Header/Header";
 import { LockOutlined, MailOutlined, CheckOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Form, Input } from "antd";
 import { useState } from "react";
 import { register } from "../../utils/auth";
 import { sendEmailVerification, signOut } from "firebase/auth";
@@ -19,7 +19,6 @@ function Register() {
         }
         register(values.email, values.password)
             .then((userCredential) => {
-                console.log(userCredential);
                 setAlertColor("green");
                 setErrorMessage(
                     "Success! Please check your email for verification."

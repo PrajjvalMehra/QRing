@@ -2,6 +2,7 @@ import {
     getAuth,
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
+    signOut,
 } from "firebase/auth";
 
 function login(email, password) {
@@ -14,4 +15,9 @@ function register(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
 }
 
-export { login, register };
+function logout() {
+    const auth = getAuth();
+    return signOut(auth);
+}
+
+export { login, register, logout };

@@ -6,6 +6,7 @@ import Register from "./pages/Register/Register";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ConfigProvider } from "antd";
 import "../src/utils/firebase";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 const router = createBrowserRouter([
     {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
     {
         path: "/register",
         element: <Register />,
+    },
+    {
+        path: "/dashboard",
+        element: <Dashboard />,
     },
 ]);
 

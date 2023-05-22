@@ -3,18 +3,34 @@ import { Col, Row } from "antd";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input } from "antd";
 import { login } from "../../utils/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import { Link } from "react-router-dom";
+import { onAuthStateChanged, getAuth } from "firebase/auth";
+import Loader from "../../components/Loader/Loader";
 
 function Login() {
     const [errorMessage, setErrorMessage] = useState("");
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        onAuthStateChanged(getAuth(), (user) => {
+            if (user) {
+                console.log("User is signed in.", user.email);
+                window.location.href = "/dashboard";
+            } else {
+                setLoading(false);
+                console.log("No user is signed in.");
+            }
+        });
+    }, []);
 
     const onFinish = (values) => {
         login(values.username, values.password)
             .then(async (userCredential) => {
                 // Signed in
                 setErrorMessage("");
+                window.location.href = "/dashboard";
             })
             .catch((error) => {
                 console.log(error.code);
@@ -40,6 +56,7 @@ function Login() {
     return (
         <div style={{ height: "100%", overflow: "hidden" }}>
             <Header />
+
             <Row span={24} justify="center" className="content">
                 <div
                     style={{
@@ -48,94 +65,94 @@ function Login() {
                         alignItems: "center",
                     }}
                 >
-                    <Col className="formContainer" span={24}>
-                        <div className="descriptionContainer">
-                            <h1>Use QR codes as a doorbell.</h1>
+                    {loading ? (
+                        <div style={{ paddingTop: "10em" }}>
+                            <Loader />
                         </div>
-                        <h2>Log in</h2>
+                    ) : (
+                        <Col className="formContainer" span={24}>
+                            <div className="descriptionContainer">
+                                <h1>Use QR codes as a doorbell.</h1>
+                            </div>
+                            <h2>Log in</h2>
 
-                        <Form
-                            name="normal_login"
-                            className="login-form"
-                            initialValues={{
-                                remember: true,
-                            }}
-                            onFinish={onFinish}
-                            onFinishFailed={(errorInfo) => {
-                                console.log("Failed:", errorInfo);
-                            }}
-                        >
-                            <Form.Item
-                                name="username"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: "Please enter your email.",
-                                    },
-                                ]}
+                            <Form
+                                name="normal_login"
+                                className="login-form"
+                                initialValues={{
+                                    remember: true,
+                                }}
+                                onFinish={onFinish}
+                                onFinishFailed={(errorInfo) => {
+                                    console.log("Failed:", errorInfo);
+                                }}
                             >
-                                <Input
-                                    prefix={
-                                        <MailOutlined className="site-form-item-icon" />
-                                    }
-                                    placeholder="Email"
-                                />
-                            </Form.Item>
-                            <Form.Item
-                                name="password"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: "Please input your Password!",
-                                    },
-                                ]}
-                            >
-                                <Input
-                                    prefix={
-                                        <LockOutlined className="site-form-item-icon" />
-                                    }
-                                    type="password"
-                                    placeholder="Password"
-                                />
-                            </Form.Item>
-                            <Form.Item>
                                 <Form.Item
-                                    name="remember"
-                                    valuePropName="checked"
-                                    noStyle
+                                    name="username"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: "Please enter your email.",
+                                        },
+                                    ]}
                                 >
-                                    <Checkbox>Remember me</Checkbox>
+                                    <Input
+                                        prefix={
+                                            <MailOutlined className="site-form-item-icon" />
+                                        }
+                                        placeholder="Email"
+                                    />
                                 </Form.Item>
-                            </Form.Item>
-
-                            <Form.Item>
-                                <Button
-                                    type="primary"
-                                    htmlType="submit"
-                                    className="login-form-button"
-                                    style={{
-                                        marginRight: "10px",
-                                        minWidth: "90px",
-                                    }}
+                                <Form.Item
+                                    name="password"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message:
+                                                "Please input your Password!",
+                                        },
+                                    ]}
                                 >
-                                    Log in
-                                </Button>
-                                <Button
-                                    type="text"
-                                    className="login-form-button"
-                                    style={{
-                                        marginRight: "10px",
-                                        minWidth: "90px",
-                                    }}
-                                >
-                                    <Link to="/register">Register</Link>
-                                </Button>
-                            </Form.Item>
-                        </Form>
-                        {errorMessage && (
-                            <h3 style={{ color: "red" }}> {errorMessage} </h3>
-                        )}
-                    </Col>
+                                    <Input
+                                        prefix={
+                                            <LockOutlined className="site-form-item-icon" />
+                                        }
+                                        type="password"
+                                        placeholder="Password"
+                                    />
+                                </Form.Item>
+                                <Form.Item>
+                                    <Button
+                                        type="primary"
+                                        htmlType="submit"
+                                        className="login-form-button"
+                                        style={{
+                                            marginRight: "10px",
+                                            minWidth: "90px",
+                                        }}
+                                    >
+                                        Log in
+                                    </Button>
+                                    <Button
+                                        type="text"
+                                        className="login-form-button"
+                                        style={{
+                                            marginRight: "10px",
+                                            minWidth: "90px",
+                                        }}
+                                    >
+                                        <Link to="/register">Register</Link>
+                                    </Button>
+                                </Form.Item>
+                            </Form>
+                            {errorMessage && (
+                                <h3 style={{ color: "red" }}>
+                                    {" "}
+                                    {errorMessage}{" "}
+                                </h3>
+                            )}
+                        </Col>
+                    )}
                 </div>
             </Row>
         </div>
