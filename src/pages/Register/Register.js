@@ -4,7 +4,7 @@ import Header from "../../components/Header/Header";
 import { LockOutlined, MailOutlined, CheckOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import { useState } from "react";
-import { register } from "../../utils/auth";
+import { logout, register } from "../../utils/auth";
 import { sendEmailVerification, signOut } from "firebase/auth";
 
 import "./Register.scss";
@@ -26,8 +26,10 @@ function Register() {
                 sendEmailVerification(userCredential.user, {
                     url: "http://localhost:3000",
                     handleCodeInApp: true,
+                }).then(() => {
+                    console.log("Email sent.");
+                    return logout();
                 });
-                return signOut(userCredential.user);
             })
             .catch((error) => {
                 console.log(error.code);

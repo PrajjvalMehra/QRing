@@ -1,0 +1,22 @@
+.pageBG{
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+    width: 100vw;
+}
+
+.tabContainer{
+
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+@media screen and (min-width: 600px) {
+    .tabContainer{
+        min-width: 40%;
+    }
+    .pageBG{
+        display: flex;
+        justify-content: center;
+    }
+}

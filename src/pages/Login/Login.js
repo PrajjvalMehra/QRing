@@ -2,7 +2,7 @@ import "../Login/Login.scss";
 import { Col, Row } from "antd";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input } from "antd";
-import { login } from "../../utils/auth";
+import { login, logout } from "../../utils/auth";
 import { useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import { Link } from "react-router-dom";
@@ -11,12 +11,18 @@ import Loader from "../../components/Loader/Loader";
 
 function Login() {
     const [errorMessage, setErrorMessage] = useState("");
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         onAuthStateChanged(getAuth(), (user) => {
+            console.log(user);
             if (user) {
                 console.log("User is signed in.", user.email);
+                if (user.emailVerified === false) {
+                    setErrorMessage("Please verify your email.");
+                    logout();
+                    return;
+                }
                 window.location.href = "/dashboard";
             } else {
                 setLoading(false);
@@ -29,6 +35,10 @@ function Login() {
         login(values.username, values.password)
             .then(async (userCredential) => {
                 // Signed in
+                if (userCredential.user.emailVerified === false) {
+                    setErrorMessage("Please verify your email.");
+                    return;
+                }
                 setErrorMessage("");
                 window.location.href = "/dashboard";
             })
