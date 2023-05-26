@@ -1,0 +1,25 @@
+.contentContainer{
+    padding: 20px;
+    width: 100vw;
+
+}
+
+.mainHouseContainer{
+    display: flex;
+}
+
+.houseTitleContainer{
+}
+
+
+
+@media screen and (min-width: 800px) {
+    .contentContainer{
+        min-width: 40vw;
+        max-width: 30vw;
+    }
+    .mainHouseContainer{
+        justify-content: center;
+    }
+    
+}

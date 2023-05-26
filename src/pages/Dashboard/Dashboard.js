@@ -57,7 +57,7 @@ function Dashboard() {
     ];
     return (
         <>
-            <Header />
+            <Header title={"QRing"} />
             <div>
                 <Tabs
                     defaultActiveKey="1"

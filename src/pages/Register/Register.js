@@ -1,13 +1,19 @@
 import React from "react";
 import { Col, Row } from "antd";
 import Header from "../../components/Header/Header";
-import { LockOutlined, MailOutlined, CheckOutlined } from "@ant-design/icons";
+import {
+    LockOutlined,
+    MailOutlined,
+    CheckOutlined,
+    UserOutlined,
+} from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import { useState } from "react";
 import { logout, register } from "../../utils/auth";
 import { sendEmailVerification, signOut } from "firebase/auth";
 
 import "./Register.scss";
+import { createUserNode } from "../../utils/userQueries";
 function Register() {
     const [errorMessage, setErrorMessage] = useState("");
     const [alertColor, setAlertColor] = useState("red");
@@ -15,6 +21,10 @@ function Register() {
         console.log("Received values of form: ", values);
         if (values.password !== values.confirmPassword) {
             setErrorMessage("Passwords do not match.");
+            return;
+        }
+        if (values.name == null || values.name == "") {
+            setErrorMessage("Please enter your name.");
             return;
         }
         register(values.email, values.password)
@@ -26,8 +36,13 @@ function Register() {
                 sendEmailVerification(userCredential.user, {
                     url: "http://localhost:3000",
                     handleCodeInApp: true,
-                }).then(() => {
+                }).then(async () => {
                     console.log("Email sent.");
+                    await createUserNode(
+                        userCredential.user.uid,
+                        userCredential.user.email,
+                        values.name
+                    );
                     return logout();
                 });
             })
@@ -64,7 +79,7 @@ function Register() {
                         <div className="descriptionContainer">
                             <h1>Use QR codes as a doorbell.</h1>
                         </div>
-                        <h2>Register</h2>
+                        <h2 style={{ paddingBottom: "20px" }}>Register</h2>
 
                         <Form
                             name="normal_login"
@@ -77,6 +92,22 @@ function Register() {
                                 console.log("Failed:", errorInfo);
                             }}
                         >
+                            <Form.Item
+                                name="name"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Please enter your name.",
+                                    },
+                                ]}
+                            >
+                                <Input
+                                    prefix={
+                                        <UserOutlined className="site-form-item-icon" />
+                                    }
+                                    placeholder="Name"
+                                />
+                            </Form.Item>
                             <Form.Item
                                 name="email"
                                 rules={[

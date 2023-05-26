@@ -7,6 +7,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ConfigProvider } from "antd";
 import "../src/utils/firebase";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import AddHouse from "./pages/AddHouse/AddHouse";
+import House from "./pages/House/House";
 
 const router = createBrowserRouter([
     {
@@ -20,6 +22,14 @@ const router = createBrowserRouter([
     {
         path: "/dashboard",
         element: <Dashboard />,
+    },
+    {
+        path: "/addhouse",
+        element: <AddHouse />,
+    },
+    {
+        path: "/house/:id",
+        element: <House />,
     },
 ]);
 

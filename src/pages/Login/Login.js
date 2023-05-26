@@ -8,10 +8,12 @@ import Header from "../../components/Header/Header";
 import { Link } from "react-router-dom";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
 import Loader from "../../components/Loader/Loader";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
     const [errorMessage, setErrorMessage] = useState("");
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         onAuthStateChanged(getAuth(), (user) => {
@@ -21,9 +23,13 @@ function Login() {
                 if (user.emailVerified === false) {
                     setErrorMessage("Please verify your email.");
                     logout();
+                    setLoading(false);
                     return;
                 }
-                window.location.href = "/dashboard";
+                localStorage.setItem("user", JSON.stringify(user));
+                setLoading(false);
+
+                navigate("/dashboard");
             } else {
                 setLoading(false);
                 console.log("No user is signed in.");
@@ -40,7 +46,7 @@ function Login() {
                     return;
                 }
                 setErrorMessage("");
-                window.location.href = "/dashboard";
+                navigate("/dashboard");
             })
             .catch((error) => {
                 console.log(error.code);
@@ -84,7 +90,7 @@ function Login() {
                             <div className="descriptionContainer">
                                 <h1>Use QR codes as a doorbell.</h1>
                             </div>
-                            <h2>Log in</h2>
+                            <h2 style={{ paddingBottom: "20px" }}>Log in</h2>
 
                             <Form
                                 name="normal_login"

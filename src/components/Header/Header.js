@@ -1,12 +1,28 @@
 import React from "react";
-import { Col, Row } from "antd";
+import { Col, Row, Button } from "antd";
+import { LeftOutlined } from "@ant-design/icons";
 import "../Header/Header.scss";
+import { useNavigate } from "react-router-dom";
 
-function Header() {
+function Header(props) {
+    const navigator = useNavigate();
     return (
         <Row className="header">
-            <Col span={24}>
-                <h2>QRing</h2>
+            <Col flex="10px">
+                {props.hasBackButton == true ? (
+                    <Button
+                        onClick={(e) => {
+                            navigator(-1);
+                        }}
+                        type="text"
+                        style={{ color: "white" }}
+                    >
+                        <LeftOutlined />
+                    </Button>
+                ) : null}
+            </Col>
+            <Col flex={"auto"}>
+                <h2>{props.title}</h2>
             </Col>
         </Row>
     );

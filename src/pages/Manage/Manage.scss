@@ -1,22 +1,27 @@
-.pageBG{
-    display: flex;
-    // justify-content: center;
-    align-items: center;
-    width: 100vw;
+
+h2{
+    margin: 0;
 }
 
 .tabContainer{
-
     padding-left: 20px;
     padding-right: 20px;
 }
 
-@media screen and (min-width: 600px) {
-    .tabContainer{
-        min-width: 40%;
-    }
-    .pageBG{
-        display: flex;
-        justify-content: center;
-    }
+.houseListContainer{
+    margin-top: 5px;
+    width: calc(100vw - 60px);
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
 }
+
+// @media screen and (min-width: 800px) {
+//     .tabContainer{
+//         min-width: 40%;
+//     }
+//     .pageBG{
+//         display: flex;
+//         justify-content: center;
+//     }
+// }
