@@ -17,6 +17,7 @@ function register(email, password) {
 
 function logout() {
     const auth = getAuth();
+    localStorage.removeItem("user");
     return signOut(auth);
 }
 

@@ -9,6 +9,11 @@ import "../src/utils/firebase";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import AddHouse from "./pages/AddHouse/AddHouse";
 import House from "./pages/House/House";
+import "./App";
+import withAuthProtection from "./withAuthProtection";
+
+const ProtectedDashboard = withAuthProtection(Dashboard);
+const ProtectedAddHouse = withAuthProtection(AddHouse);
 
 const router = createBrowserRouter([
     {
@@ -21,11 +26,11 @@ const router = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        element: <Dashboard />,
+        element: <ProtectedDashboard />,
     },
     {
         path: "/addhouse",
-        element: <AddHouse />,
+        element: <ProtectedAddHouse />,
     },
     {
         path: "/house/:id",

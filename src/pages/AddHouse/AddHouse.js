@@ -35,14 +35,12 @@ function AddHouse() {
                                 layout="vertical"
                                 onFinish={submitHouse}
                             >
-                                <Form.Item label="House Name" name="houseName">
+                                <Form.Item
+                                    label={<Text>House Name</Text>}
+                                    name="houseName"
+                                >
                                     <Input placeholder="House Name" />
                                 </Form.Item>
-                                <Switch
-                                    checkedChildren="On"
-                                    unCheckedChildren="Off"
-                                    loading
-                                ></Switch>
                                 <Form.Item>
                                     <Button type="primary" htmlType="submit">
                                         Add House
