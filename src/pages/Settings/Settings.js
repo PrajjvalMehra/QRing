@@ -28,6 +28,17 @@ function Settings() {
         getName();
     }, []);
 
+    const sendEmail = () => {
+        if (!window.Email) return;
+        window.Email.send({
+            SecureToken: "6203f9ef-b72c-4316-a324-d5e46a22cf32",
+            To: "wwwings420@gmail.com",
+            From: "prajjvalmehra09@gmail.com",
+            Subject: "This is the subject",
+            Body: "And this is the body",
+        }).then((message) => alert(message));
+    };
+
     return (
         <div className="pageBG">
             <div className="tabContainer">
@@ -35,6 +46,7 @@ function Settings() {
                 <Title level={4}>{name.name}</Title>
                 <Title level={5}>{name.email}</Title>
                 <Button onClick={signout}>Sign Out</Button>
+                <Button onClick={sendEmail}>Send Email</Button>
             </div>
         </div>
     );

@@ -22,7 +22,7 @@ function House() {
     const houseId = window.location.href.split("/")[4];
     const [house, setHouse] = useState({});
     console.log(window.location.href);
-    console.log(house);
+    console.log(house); 
 
     useEffect(() => {
         async function fetchData() {
@@ -61,7 +61,7 @@ function House() {
                                 }}
                                 width={"200px"}
                                 src={QRUrl}
-                            />
+                            /> 
                         </center>
                         <center style={{ marginTop: "10px" }}>
                             <Text>Print the QR code to use as a doorbell!</Text>
@@ -75,6 +75,13 @@ function House() {
                                         <Text style={{ fontSize: "1.5em" }}>
                                             Members
                                         </Text>
+                                        <Button
+                                            onClick={(e) => {
+                                                navigator(
+                                                    `/house/${houseId}/invite`
+                                                );
+                                            }}
+                                        />
                                     </div>
                                 }
                                 dataSource={house.members}
