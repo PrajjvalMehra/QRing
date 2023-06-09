@@ -24,8 +24,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "cd mailer && npm install && node index.js",
-    "build": "npm i && npm run build",
+    "start": "",
+    "build": "",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
