@@ -9,6 +9,12 @@ env.config({ path: "./.env" });
 app.use(cors());
 
 // sendEmail("wwwings420@gmail.com", "Email Verification", "1234567890");
+app.use(express.static("../client/build"));
+const path = require("path");
+app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
+});
+
 app.post("/invite", (req, res) => {
     const { email, houseId } = req.body;
     sendEmail(

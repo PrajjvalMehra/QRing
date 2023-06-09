@@ -1,0 +1,27 @@
+.contentContainer{
+    padding: 20px;
+    width: 100vw;
+
+}
+
+.mainHouseContainer{
+    display: flex;
+
+}
+
+.memberListContainer{
+    margin-top: 20px;
+}
+
+
+
+@media screen and (min-width: 800px) {
+    .contentContainer{
+        min-width: 40vw;
+        max-width: 30vw;
+    }
+    .mainHouseContainer{
+        justify-content: center;
+    }
+    
+}
