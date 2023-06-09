@@ -25,7 +25,7 @@
   },
   "scripts": {
     "start": "cd mailer && npm install && node index.js",
-    "build": "npm",
+    "build": "npm i && npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
