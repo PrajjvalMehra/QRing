@@ -31,7 +31,7 @@ const sendEmail = (to, subject, data) => {
         from: "QRing " + process.env.MAILER_EMAIL,
         to: to,
         subject: subject,
-        html: html,
+        html: data,
     };
     transporter.sendMail(mailOptions, (err, info) => {
         if (err) {

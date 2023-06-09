@@ -3,6 +3,8 @@ import Loader from "../../components/Loader/Loader";
 import { useState } from "react";
 import { useEffect } from "react";
 import { db } from "../../utils/firebase";
+import { PlusOutlined } from "@ant-design/icons";
+
 import { getHouseDetails } from "../../utils/houseQueries";
 import Header from "../../components/Header/Header";
 import { Typography, List, Button, Image } from "antd";
@@ -22,7 +24,7 @@ function House() {
     const houseId = window.location.href.split("/")[4];
     const [house, setHouse] = useState({});
     console.log(window.location.href);
-    console.log(house); 
+    console.log(house);
 
     useEffect(() => {
         async function fetchData() {
@@ -32,6 +34,19 @@ function House() {
         fetchData();
         generateQR(window.location.href);
     }, [houseId]);
+
+    const sendInvite = async () => {
+        const email = prompt("Enter email to send invite to");
+        const response = await fetch("http://localhost:8000/invite", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, houseId }),
+        });
+        const data = await response.text();
+        console.log(data);
+    };
 
     const generateQR = async (text) => {
         try {
@@ -61,7 +76,7 @@ function House() {
                                 }}
                                 width={"200px"}
                                 src={QRUrl}
-                            /> 
+                            />
                         </center>
                         <center style={{ marginTop: "10px" }}>
                             <Text>Print the QR code to use as a doorbell!</Text>
@@ -76,12 +91,13 @@ function House() {
                                             Members
                                         </Text>
                                         <Button
+                                            type="text"
                                             onClick={(e) => {
-                                                navigator(
-                                                    `/house/${houseId}/invite`
-                                                );
+                                                sendInvite();
                                             }}
-                                        />
+                                        >
+                                            <PlusOutlined />
+                                        </Button>
                                     </div>
                                 }
                                 dataSource={house.members}
