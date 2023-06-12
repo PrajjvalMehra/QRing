@@ -9,7 +9,7 @@ function Header(props) {
     return (
         <Row className="header">
             <Col flex="10px">
-                {props.hasBackButton == true ? (
+                {props.hasBackButton === true ? (
                     <Button
                         onClick={(e) => {
                             navigator(-1);
