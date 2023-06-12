@@ -30,7 +30,7 @@ async function addMember(houseId, email) {
     }
     houseData.uids.filter((uid) => {
         if (uid === userData.id) {
-            throw new Error("User already exists in house");
+            return new Error("User already exists in house");
         }
     });
     const members = houseData.members;

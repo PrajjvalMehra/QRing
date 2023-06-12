@@ -1,6 +1,7 @@
 import React from "react";
 import { Modal, Form, Input, message } from "antd";
 import { MailOutlined } from "@ant-design/icons";
+import axios from "axios";
 
 function AddMemberModal({ open, closeModal, houseId }) {
     const [email, setEmail] = React.useState("");
@@ -12,16 +13,25 @@ function AddMemberModal({ open, closeModal, houseId }) {
             messageApi.error("Please enter an email.");
             return;
         }
-        await fetch("http://localhost:8000/invite", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email, houseId }),
-        }).then((res) => {
-            messageApi.success("Invite sent!");
-            closeModal();
-        });
+        // await fetch("http://localhost:8000/invite", {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify({ email, houseId }),
+        // }).then((res) => {
+        //     messageApi.success("Invite sent!");
+        //     closeModal();
+        // });
+        await axios
+            .post("/invite", {
+                email,
+                houseId,
+            })
+            .then((res) => {
+                messageApi.success("Invite sent!");
+                closeModal();
+            });
     };
     const handleCancel = () => {
         closeModal();

@@ -10,7 +10,7 @@ import {
 import { Button, Form, Input } from "antd";
 import { useState } from "react";
 import { logout, register } from "../../utils/auth";
-import { sendEmailVerification, signOut } from "firebase/auth";
+import { sendEmailVerification } from "firebase/auth";
 import { useLocation } from "react-router-dom";
 import "./Register.scss";
 import { createUserNode } from "../../utils/userQueries";
@@ -25,7 +25,7 @@ function Register() {
             setErrorMessage("Passwords do not match.");
             return;
         }
-        if (values.name == null || values.name == "") {
+        if (values.name === null || values.name === "") {
             setErrorMessage("Please enter your name.");
             return;
         }

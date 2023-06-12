@@ -20,7 +20,7 @@ app.post("/invite", (req, res) => {
     sendEmail(
         email,
         "Invitation to join a house on QRing",
-        `https://qeing.onrender.com/invite?houseId=${houseId}&email=${email}`
+        `https://qring.onrender.com/invite?houseId=${houseId}&email=${email}`
     );
     res.send("Email sent");
 });
