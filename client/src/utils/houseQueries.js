@@ -1,4 +1,3 @@
-import { fetchSignInMethodsForEmail, getAuth } from "firebase/auth";
 import { db } from "./firebase";
 import { doc, setDoc, updateDoc, getDoc } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
@@ -30,8 +29,10 @@ async function addMember(houseId, email) {
     }
     houseData.uids.filter((uid) => {
         if (uid === userData.id) {
-            return new Error("User already exists in house");
+            //eslint-disable-next-line
+            throw new Error("User already exists in house");
         }
+        return uid;
     });
     const members = houseData.members;
     members.push({

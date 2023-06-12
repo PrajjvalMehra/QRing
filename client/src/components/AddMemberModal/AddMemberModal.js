@@ -6,7 +6,6 @@ import axios from "axios";
 function AddMemberModal({ open, closeModal, houseId }) {
     const [email, setEmail] = React.useState("");
     const [messageApi, contextHolder] = message.useMessage();
-    const [modalText, setModalText] = React.useState("Content of the modal");
 
     const handleOk = async () => {
         if (!email) {
