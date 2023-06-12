@@ -11,6 +11,7 @@ import AddHouse from "./pages/AddHouse/AddHouse";
 import House from "./pages/House/House";
 import "./App";
 import withAuthProtection from "./withAuthProtection";
+import Invite from "./pages/Invite/Invite";
 
 const ProtectedDashboard = withAuthProtection(Dashboard);
 const ProtectedAddHouse = withAuthProtection(AddHouse);
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
     {
         path: "/house/:id",
         element: <House />,
+    },
+    {
+        path: "/invite",
+        element: <Invite />,
     },
 ]);
 

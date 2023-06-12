@@ -20,11 +20,11 @@ app.post("/invite", (req, res) => {
     sendEmail(
         email,
         "Invitation to join a house on QRing",
-        `https://qring.herokuapp.com/house/${houseId}`
+        `https://qeing.onrender.com/invite?houseId=${houseId}&email=${email}`
     );
     res.send("Email sent");
 });
 
 app.listen(process.env.PORT, () => {
-    console.log(`Server is running on port ${process.env.PORT}`);
+    `Server is running on port ${process.env.PORT}`;
 });

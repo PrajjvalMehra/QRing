@@ -11,14 +11,20 @@ import { Button, Form, Input } from "antd";
 import { useState } from "react";
 import { logout, register } from "../../utils/auth";
 import { sendEmailVerification, signOut } from "firebase/auth";
-
+import { useLocation } from "react-router-dom";
 import "./Register.scss";
 import { createUserNode } from "../../utils/userQueries";
+import { addMember } from "../../utils/houseQueries";
 function Register() {
+    const { email, houseId } = useLocation().state || {};
     const [errorMessage, setErrorMessage] = useState("");
     const [alertColor, setAlertColor] = useState("red");
+
+    React.useEffect(() => {
+        setParams({ email, houseId });
+    }, []);
+
     const onFinish = (values) => {
-        console.log("Received values of form: ", values);
         if (values.password !== values.confirmPassword) {
             setErrorMessage("Passwords do not match.");
             return;
@@ -37,12 +43,16 @@ function Register() {
                     url: "http://localhost:3000",
                     handleCodeInApp: true,
                 }).then(async () => {
-                    console.log("Email sent.");
                     await createUserNode(
                         userCredential.user.uid,
                         userCredential.user.email,
                         values.name
-                    );
+                    ).then(async () => {
+                        if (houseId) {
+                            await addMember(houseId, email);
+                        }
+                    });
+
                     return logout();
                 });
             })
@@ -85,6 +95,7 @@ function Register() {
                             name="normal_login"
                             className="login-form"
                             initialValues={{
+                                email: email,
                                 remember: true,
                             }}
                             onFinish={onFinish}
@@ -110,6 +121,7 @@ function Register() {
                             </Form.Item>
                             <Form.Item
                                 name="email"
+                                initialValue={email}
                                 rules={[
                                     {
                                         required: true,

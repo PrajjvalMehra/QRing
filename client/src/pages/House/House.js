@@ -15,6 +15,7 @@ import {
     UserOutlined,
 } from "@ant-design/icons";
 import "./House.scss";
+import AddMemberModal from "../../components/AddMemberModal/AddMemberModal";
 
 const { Title, Text } = Typography;
 
@@ -23,8 +24,14 @@ function House() {
     const [QRUrl, setQRUrl] = useState("");
     const houseId = window.location.href.split("/")[4];
     const [house, setHouse] = useState({});
-    console.log(window.location.href);
-    console.log(house);
+    const [open, setOpen] = useState(false);
+
+    const showModal = () => {
+        setOpen(true);
+    };
+    const closeModal = () => {
+        setOpen(false);
+    };
 
     useEffect(() => {
         async function fetchData() {
@@ -36,16 +43,7 @@ function House() {
     }, [houseId]);
 
     const sendInvite = async () => {
-        const email = prompt("Enter email to send invite to");
-        const response = await fetch("http://localhost:8000/invite", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email, houseId }),
-        });
-        const data = await response.text();
-        console.log(data);
+        showModal();
     };
 
     const generateQR = async (text) => {
@@ -145,6 +143,11 @@ function House() {
                     </div>
                 </div>
             </div>
+            <AddMemberModal
+                open={open}
+                closeModal={closeModal}
+                houseId={houseId}
+            />
         </>
     );
 }

@@ -10,13 +10,11 @@ import {
 } from "firebase/firestore";
 import { db } from "./firebase";
 async function createUserNode(uid, email, name) {
-    console.log("Creating user node...");
     await setDoc(doc(db, "users", uid), {
         email: email,
         name: name,
     })
         .then(() => {
-            console.log("User node created.");
             return;
         })
         .catch((error) => {
@@ -35,17 +33,14 @@ async function getHouseList() {
         )
     );
     const querySnapshot = await getDocs(q);
-    console.log(querySnapshot);
     const houses = [];
     querySnapshot.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
         houses.push({ ...doc.data(), id: doc.id });
     });
     return filterHouseList(houses);
 }
 
 function filterHouseList(houses) {
-    console.log(houses);
     const result = [];
     houses.forEach((house) => {
         house.members.forEach((member) => {
@@ -67,12 +62,26 @@ async function fetchUserInfoById(uid) {
     const docSnapshot = await getDoc(docRef);
 
     if (docSnapshot.exists()) {
-        console.log("Document data:", docSnapshot.data());
         return docSnapshot.data();
     } else {
-        console.log("No such document!");
         return null;
     }
 }
 
-export { createUserNode, getHouseList, fetchUserInfoById };
+async function fetchUserInfoByEmail(email) {
+    const q = query(collection(db, "users"), where("email", "==", `${email}`));
+
+    const querySnapshot = await getDocs(q);
+    const users = [];
+    querySnapshot.forEach((doc) => {
+        users.push({ ...doc.data(), id: doc.id });
+    });
+    return users[0];
+}
+
+export {
+    createUserNode,
+    getHouseList,
+    fetchUserInfoById,
+    fetchUserInfoByEmail,
+};
