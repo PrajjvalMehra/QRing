@@ -22,7 +22,6 @@ function Settings() {
             const data = await fetchUserInfoById(
                 JSON.parse(localStorage.getItem("user")).uid
             );
-            console.log(data);
             setName(data);
         }
         getName();

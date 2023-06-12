@@ -8,9 +8,7 @@ import Settings from "../Settings/Settings";
 import Manage from "../Manage/Manage";
 
 function Dashboard() {
-    const onChange = (key) => {
-        console.log(key);
-    };
+    const onChange = (key) => {};
     const items = [
         {
             key: "1",

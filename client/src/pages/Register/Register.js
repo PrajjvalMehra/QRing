@@ -20,10 +20,6 @@ function Register() {
     const [errorMessage, setErrorMessage] = useState("");
     const [alertColor, setAlertColor] = useState("red");
 
-    React.useEffect(() => {
-        setParams({ email, houseId });
-    }, []);
-
     const onFinish = (values) => {
         if (values.password !== values.confirmPassword) {
             setErrorMessage("Passwords do not match.");
@@ -76,7 +72,7 @@ function Register() {
     };
     return (
         <>
-            <Header />
+            <Header title={"QRing"} />
             <Row justify="space-around" align="middle" className="content">
                 <div
                     style={{

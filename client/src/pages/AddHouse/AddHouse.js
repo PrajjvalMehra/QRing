@@ -13,7 +13,6 @@ function AddHouse() {
     const [loading, setLoading] = useState(false);
     const submitHouse = async (values) => {
         if (!values.houseName) return;
-        console.log(values.houseName);
         setLoading(true);
         await addHouse(values.houseName);
         setLoading(false);

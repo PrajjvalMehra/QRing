@@ -17,9 +17,7 @@ function Login() {
 
     useEffect(() => {
         onAuthStateChanged(getAuth(), (user) => {
-            console.log(user);
             if (user) {
-                console.log("User is signed in.", user.email);
                 if (user.emailVerified === false) {
                     setErrorMessage("Please verify your email.");
                     logout();
@@ -32,7 +30,6 @@ function Login() {
                 navigate("/dashboard");
             } else {
                 setLoading(false);
-                console.log("No user is signed in.");
             }
         });
     }, []);
@@ -71,7 +68,7 @@ function Login() {
 
     return (
         <div style={{ height: "100%", overflow: "hidden" }}>
-            <Header />
+            <Header title={"QRing"} />
 
             <Row span={24} justify="center" className="content">
                 <div
