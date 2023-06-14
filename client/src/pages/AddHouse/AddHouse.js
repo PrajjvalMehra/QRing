@@ -24,7 +24,7 @@ function AddHouse() {
     return (
         <>
             <Header hasBackButton={true} title={"Add House"} />
-            <div>
+            <div style={{ paddingTop: "60px" }}>
                 <div className="tabContainer">
                     <Row>
                         <Col>
@@ -48,6 +48,9 @@ function AddHouse() {
                                 </Form.Item>
                             </Form>
                         </Col>
+                        <Button onClick={requestLocation}>
+                            Request Location
+                        </Button>
                     </Row>
                 </div>
             </div>

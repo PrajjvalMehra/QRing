@@ -3,6 +3,7 @@ import { Col, Row, Button } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
 import "../Header/Header.scss";
 import { useNavigate } from "react-router-dom";
+import Loader from "../Loader/Loader";
 
 function Header(props) {
     const navigator = useNavigate();
@@ -21,9 +22,13 @@ function Header(props) {
                     </Button>
                 ) : null}
             </Col>
-            <Col flex={"auto"}>
-                <h2>{props.title}</h2>
-            </Col>
+            {props.title === undefined ? (
+                <Loader type={"header"} />
+            ) : (
+                <Col flex={"auto"}>
+                    <h2>{props.title}</h2>
+                </Col>
+            )}
         </Row>
     );
 }
