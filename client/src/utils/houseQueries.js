@@ -3,13 +3,13 @@ import { doc, setDoc, updateDoc, getDoc } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 import { fetchUserInfoByEmail, fetchUserInfoById } from "./userQueries";
 
-async function addHouse(name) {
-    const houseId = uuidv4();
+async function addHouse(name, coordinates, houseId) {
     const userData = await localStorage.getItem("user");
     const uid = JSON.parse(userData).uid;
     const userName = await fetchUserInfoById(uid);
     await setDoc(doc(db, "houses", houseId), {
         name: name,
+        coordinates: coordinates,
         members: [{ uid: uid, admin: true, name: userName.name }],
         alerts: [],
         uids: [uid],
@@ -17,7 +17,7 @@ async function addHouse(name) {
         await updateDoc(doc(db, "users", uid), {
             houses: [houseId],
         }).then(() => {
-            return;
+            return true;
         });
     });
 }

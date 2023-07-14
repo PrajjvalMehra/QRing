@@ -9,6 +9,8 @@ import Manage from "../Manage/Manage";
 
 function Dashboard() {
     const onChange = (key) => {};
+    console.log("Dashboard");
+
     const items = [
         {
             key: "1",
