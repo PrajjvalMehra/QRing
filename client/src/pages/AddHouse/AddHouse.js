@@ -75,68 +75,67 @@ function AddHouse() {
     return (
         <>
             <Header hasBackButton={true} title={"Add House"} />
-            <div style={{ paddingTop: "60px" }}>
-                <div className="tabContainer">
-                    <Row>
-                        <Col
-                            className="addHouseContainer"
-                            style={{ width: "100%" }}
+            <div className="addHouseMainC">
+                <Row>
+                    <Col
+                        className="addHouseContainer"
+                        style={{ width: "100vw" }}
+                    >
+                        <Form
+                            name="basic"
+                            className="addHouseForm"
+                            initialValues={{ remember: true }}
+                            layout="vertical"
+                            onFinish={submitHouse}
                         >
-                            <Form
-                                name="basic"
-                                initialValues={{ remember: true }}
-                                layout="vertical"
-                                onFinish={submitHouse}
+                            <Form.Item
+                                label={
+                                    <>
+                                        <h2>{steps[current].title}</h2>
+                                    </>
+                                }
+                                name="houseName"
                             >
-                                <Form.Item
-                                    label={
-                                        <>
-                                            <h2>{steps[current].title}</h2>
-                                        </>
-                                    }
-                                    name="houseName"
-                                >
-                                    <Input placeholder="House Name" />
-                                </Form.Item>
-                                <div
+                                <Input placeholder="House Name" />
+                            </Form.Item>
+                            <div
+                                style={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    marginBottom: "40px",
+                                }}
+                            >
+                                <Text
                                     style={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        marginBottom: "40px",
+                                        fontWeight: "bold",
+                                        fontSize: "14px",
                                     }}
                                 >
-                                    <Text
-                                        style={{
-                                            fontWeight: "bold",
-                                            fontSize: "14px",
-                                        }}
-                                    >
-                                        <Checkbox onChange={onChange} /> &nbsp;
-                                        Add location to secure the QR code.{" "}
-                                    </Text>
-                                </div>
-                                <Form.Item>
-                                    <Button
-                                        type="primary"
-                                        style={{
-                                            width: "100%",
-                                            height: "40px",
-                                        }}
-                                        htmlType="submit"
-                                        loading={loading}
-                                    >
-                                        Add House
-                                    </Button>
-                                    {showError && (
-                                        <h4 style={{ color: "red" }}>
-                                            Please enter a house name.
-                                        </h4>
-                                    )}
-                                </Form.Item>
-                            </Form>
-                        </Col>
-                    </Row>
-                </div>
+                                    <Checkbox onChange={onChange} /> &nbsp; Add
+                                    location to secure the QR code.{" "}
+                                </Text>
+                            </div>
+                            <Form.Item>
+                                <Button
+                                    type="primary"
+                                    style={{
+                                        width: "100%",
+                                        height: "40px",
+                                    }}
+                                    htmlType="submit"
+                                    loading={loading}
+                                >
+                                    Add House
+                                </Button>
+                                {showError && (
+                                    <h4 style={{ color: "red" }}>
+                                        Please enter a house name.
+                                    </h4>
+                                )}
+                            </Form.Item>
+                        </Form>
+                    </Col>
+                </Row>
             </div>
         </>
     );

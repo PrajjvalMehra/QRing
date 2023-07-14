@@ -1,11 +1,31 @@
 @import '../../index.scss';
 
 
+.addHouseMainC{
+    // width: 100vw;
+    display: flex;
+    padding-top: 60px;
+    padding-right: 20px;
+    padding-left: 20px;
+    
+    // background-color: red;
+    justify-content: center;
+    
+}
+
 
 .addHouseContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    max-width: 500px;
     margin-top: 20px;
 }
+
+@media screen and (min-width: 800px) {
+    .addHouseMainC{
+        justify-content: center;
+    
+    padding-left: 16em;
+        padding-right: 16em;
+    }
+    
+}
+    
