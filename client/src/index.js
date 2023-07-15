@@ -12,6 +12,7 @@ import House from "./pages/House/House";
 import "./App";
 import withAuthProtection from "./withAuthProtection";
 import Invite from "./pages/Invite/Invite";
+import NoInternet from "./pages/NoInternet/NoInternet";
 
 const ProtectedDashboard = withAuthProtection(Dashboard);
 const ProtectedAddHouse = withAuthProtection(AddHouse);
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
     {
         path: "/invite",
         element: <Invite />,
+    },
+    {
+        path: "/offline",
+        element: <NoInternet />,
     },
 ]);
 

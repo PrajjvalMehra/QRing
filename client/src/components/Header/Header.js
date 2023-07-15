@@ -1,6 +1,7 @@
 import React from "react";
 import { Col, Row, Button } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
+import Logo from "../../assets/logo-no-bg.png";
 import "../Header/Header.scss";
 import { useNavigate } from "react-router-dom";
 import Loader from "../Loader/Loader";
@@ -25,9 +26,21 @@ function Header(props) {
             {props.title === undefined ? (
                 <Loader type={"header"} />
             ) : (
-                <Col flex={"auto"}>
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                >
+                    {props.title === "QRing" && (
+                        <img
+                            src={Logo}
+                            style={{ height: "50px", width: "auto" }}
+                        />
+                    )}
                     <h2>{props.title}</h2>
-                </Col>
+                </div>
             )}
         </Row>
     );
