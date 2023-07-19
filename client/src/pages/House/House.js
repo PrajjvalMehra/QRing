@@ -39,7 +39,9 @@ function House() {
             setHouse(houseData);
         }
         fetchData();
-        generateQR(window.location.href);
+        const link = window.location.href.split("/");
+        console.log(link[0] + "//" + link[2] + "/ping/" + houseId);
+        generateQR(link[0] + "//" + link[2] + "/ping/" + houseId);
     }, [houseId]);
 
     const sendInvite = async () => {

@@ -25,6 +25,20 @@ app.post("/invite", (req, res) => {
     res.send("Email sent");
 });
 
+app.post("/ping", (req, res) => {
+    const { email, type } = req.body;
+    sendEmail(
+        email,
+        `${type === 0 ? "Someone is at the Door!" : "Delivery"}`,
+        `${
+            type === 0
+                ? "Someone is at the door! Please open the door."
+                : "You have a delivery! Please open the door."
+        }`
+    );
+    res.send("Email sent");
+});
+
 app.listen(process.env.PORT, () => {
     `Server is running on port ${process.env.PORT}`;
 });

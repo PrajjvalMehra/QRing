@@ -13,6 +13,7 @@ import "./App";
 import withAuthProtection from "./withAuthProtection";
 import Invite from "./pages/Invite/Invite";
 import NoInternet from "./pages/NoInternet/NoInternet";
+import Ping from "./pages/Ping/Ping";
 
 const ProtectedDashboard = withAuthProtection(Dashboard);
 const ProtectedAddHouse = withAuthProtection(AddHouse);
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
     {
         path: "/offline",
         element: <NoInternet />,
+    },
+    {
+        path: "/ping/:houseId",
+        element: <Ping />,
     },
 ]);
 

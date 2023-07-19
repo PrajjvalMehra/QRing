@@ -1,0 +1,39 @@
+.mainPingContainer{
+    display: flex;
+    margin-top: 60px;
+    height: calc(100vh - 60px);
+    flex-direction: column;
+    // background-color: red;
+    justify-content: center;
+    align-items: center;
+}
+
+.contentHeaderContainer{
+    flex-direction: column;
+}
+
+.replyStackContainer{
+    flex-direction: column;
+
+}
+
+.replyItemContainer{
+    margin-bottom: 15px;
+}
+
+.itemButton{
+    min-width: 200px;
+}
+
+.memberItemContainer{
+    margin-bottom: 15px;
+    border-radius: 5px;
+    min-width: 100%;
+    min-height: 40px;
+}
+
+.itemButton{
+
+    min-width: 100%;
+    // text-align: left;
+}
