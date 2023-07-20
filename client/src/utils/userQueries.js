@@ -13,6 +13,7 @@ async function createUserNode(uid, email, name) {
     await setDoc(doc(db, "users", uid), {
         email: email,
         name: name,
+        appNotifications: false,
     })
         .then(() => {
             return;
@@ -79,9 +80,27 @@ async function fetchUserInfoByEmail(email) {
     return users[0];
 }
 
+async function disableAppNotifications(uid) {
+    const userRef = doc(db, "users", uid);
+    await setDoc(
+        userRef,
+        {
+            appNotifications: false,
+        },
+        { merge: true }
+    )
+        .then(() => {
+            console.log("Document successfully written!");
+        })
+        .catch((error) => {
+            console.error("Error writing document: ", error);
+        });
+}
+
 export {
     createUserNode,
     getHouseList,
     fetchUserInfoById,
+    disableAppNotifications,
     fetchUserInfoByEmail,
 };

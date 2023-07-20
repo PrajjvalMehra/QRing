@@ -1,6 +1,8 @@
+const fcm = require("./fcm/setup");
 const express = require("express");
 const env = require("dotenv");
 const { sendEmail } = require("./email");
+const { initializeApp } = require("firebase-admin/app");
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -11,6 +13,7 @@ app.use(cors());
 // sendEmail("wwwings420@gmail.com", "Email Verification", "1234567890");
 app.use(express.static("../client/build"));
 const path = require("path");
+const { sendNotification } = require("./fcm/notify");
 app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
 });
@@ -36,6 +39,7 @@ app.post("/ping", (req, res) => {
                 : "You have a delivery! Please open the door."
         }`
     );
+    sendNotification(email, "QRing", "Someone is at the door!");
     res.send("Email sent");
 });
 

@@ -1,0 +1,15 @@
+.notificationContainer {
+    margin-top: 20px;
+}
+
+.settingsListItem{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.signOutButton{
+    margin-top: 20px;
+    bottom: 0;
+    position: sticky;
+}
