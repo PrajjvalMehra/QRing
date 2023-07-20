@@ -14,6 +14,9 @@ function Header(props) {
     const [notificationR, setNotificationR] = React.useState();
 
     const openNotification = () => {
+        if (notificationR === undefined) {
+            return;
+        }
         api.open({
             message: "🔔 " + notificationR.data.title,
             description: notificationR.data.body,
