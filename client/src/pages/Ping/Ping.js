@@ -68,12 +68,21 @@ function Ping() {
                     .post("/ping", {
                         email: email,
                         type: 0,
+                        houseName: house.name,
                     })
                     .then((res) => {
                         console.log(res);
                     });
             } else if (index === 1) {
-                console.log("delivering");
+                axios
+                    .post("/ping", {
+                        email: email,
+                        type: 1,
+                        houseName: house.name,
+                    })
+                    .then((res) => {
+                        console.log(res);
+                    });
             }
             console.log(uid, email);
             messageApi.success("Ping sent!");

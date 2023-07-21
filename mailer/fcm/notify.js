@@ -4,12 +4,14 @@ const db = admin.firestore();
 
 const sendNotification = async (email, title, body) => {
     console.log("sending notification", email, title, body);
+    let userId;
     admin
         .auth()
         .getUserByEmail(email)
         .then((userRecord) => {
             // Fetch data from Firestore
             let uid = userRecord.uid;
+            userId = uid;
             return db.collection("users").doc(uid).get();
         })
         .then((doc) => {
@@ -24,7 +26,7 @@ const sendNotification = async (email, title, body) => {
                 messaging
                     .send(payload)
                     .then((response) => {
-                        console.log("Successfully sent message:", response);
+                        console.log("Successfully sent message");
                     })
                     .catch((error) => {
                         console.log("Error sending message:", error);

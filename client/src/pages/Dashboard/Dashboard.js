@@ -8,7 +8,10 @@ import Settings from "../Settings/Settings";
 import Manage from "../Manage/Manage";
 
 function Dashboard() {
-    const onChange = (key) => {};
+    const [key, setKey] = React.useState("1");
+    const onChange = (key) => {
+        setKey(key);
+    };
     console.log("Dashboard");
 
     const items = [
@@ -24,7 +27,7 @@ function Dashboard() {
                     Alerts
                 </div>
             ),
-            children: <Alerts />,
+            children: <Alerts key={key} />,
         },
         {
             key: "2",
@@ -60,10 +63,11 @@ function Dashboard() {
             <Header title={"QRing"} />
             <div>
                 <Tabs
-                    defaultActiveKey="1"
+                    defaultActiveKey="2"
                     tabPosition="bottom"
                     items={items}
                     onChange={onChange}
+                    activeKey={key}
                     size="large"
                     centered
                     tabBarStyle={{

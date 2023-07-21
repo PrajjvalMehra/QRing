@@ -14,6 +14,7 @@ app.use(cors());
 app.use(express.static("../client/build"));
 const path = require("path");
 const { sendNotification } = require("./fcm/notify");
+const { addAlert } = require("./utils");
 app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
 });
@@ -29,17 +30,26 @@ app.post("/invite", (req, res) => {
 });
 
 app.post("/ping", (req, res) => {
-    const { email, type } = req.body;
+    const { email, type, houseName } = req.body;
     sendEmail(
         email,
-        `${type === 0 ? "Someone is at the Door!" : "Delivery"}`,
+        houseName,
         `${
             type === 0
                 ? "Someone is at the door! Please open the door."
-                : "You have a delivery! Please open the door."
+                : "You have a delivery!  Please pick it up."
         }`
     );
-    sendNotification(email, "QRing", "Someone is at the door!");
+    sendNotification(
+        email,
+        houseName,
+        `${
+            type === 0
+                ? "Someone is at the door! Please open the door."
+                : "You have a delivery! Please pick it up."
+        }`
+    );
+    addAlert(houseName, email, type);
     res.send("Email sent");
 });
 

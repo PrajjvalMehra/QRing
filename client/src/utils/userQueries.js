@@ -63,6 +63,7 @@ async function fetchUserInfoById(uid) {
     const docSnapshot = await getDoc(docRef);
 
     if (docSnapshot.exists()) {
+        console.log("Document data:", docSnapshot.data());
         return docSnapshot.data();
     } else {
         return null;
