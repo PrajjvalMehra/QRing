@@ -13,7 +13,17 @@ function Loader(props) {
             spin
         />
     );
-    return <Spin indicator={antIcon} />;
+    return (
+        <div
+            style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+            }}
+        >
+            <Spin indicator={antIcon} />;
+        </div>
+    );
 }
 
 export default Loader;

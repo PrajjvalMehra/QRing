@@ -26,6 +26,10 @@ function Header(props) {
     onMessage(messaging, (payload) => {
         console.log("Message received. ", payload);
         setNotificationR(payload);
+        new window.Notification(payload.data.title, {
+            icon: "https://raw.githubusercontent.com/PrajjvalMehra/QRing/main/client/public/Png/512.png",
+            body: payload.data.body,
+        });
     });
 
     React.useEffect(() => {
