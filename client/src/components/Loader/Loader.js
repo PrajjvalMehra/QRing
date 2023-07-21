@@ -21,7 +21,7 @@ function Loader(props) {
                 alignItems: "center",
             }}
         >
-            <Spin indicator={antIcon} />;
+            <Spin indicator={antIcon} />
         </div>
     );
 }

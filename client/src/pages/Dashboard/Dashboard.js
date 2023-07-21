@@ -27,7 +27,7 @@ function Dashboard() {
                     Alerts
                 </div>
             ),
-            children: <Alerts key={key} />,
+            children: <Alerts activeKey={key} />,
         },
         {
             key: "2",
@@ -41,7 +41,7 @@ function Dashboard() {
                     Manage
                 </div>
             ),
-            children: <Manage />,
+            children: <Manage activeKey={key} />,
         },
         {
             key: "3",
@@ -55,7 +55,7 @@ function Dashboard() {
                     Settings
                 </div>
             ),
-            children: <Settings />,
+            children: <Settings activeKey={key} />,
         },
     ];
     return (
@@ -67,7 +67,6 @@ function Dashboard() {
                     tabPosition="bottom"
                     items={items}
                     onChange={onChange}
-                    activeKey={key}
                     size="large"
                     centered
                     tabBarStyle={{
